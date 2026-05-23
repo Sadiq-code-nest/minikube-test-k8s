@@ -21,9 +21,14 @@ spec:
         env:
         - name: NODE_ENV
           value: "production"
-        - name: MONGO_URI
-          value: "mongodb://mongo-service:27017/chatapp"
+        - name: MONGODB_URI
+          value: "mongodb://mongoadmin:password@mongodb:27017/dbname?authSource=admin"
         - name: JWT_SECRET
-          value: "your_jwt_secret_key"
+          valueFrom:
+            secretKeyRef:
+              name: chatapp-secret
+              key: jwt_secret
         - name: PORT
           value: "5001"
+        - name: FRONTEND_URL
+          value: "http://localhost:3000"
